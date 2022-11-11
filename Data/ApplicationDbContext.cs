@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using GET_Biblioteka.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GET_Biblioteka.Data
@@ -9,5 +10,8 @@ namespace GET_Biblioteka.Data
             : base(options)
         {
         }
+        public DbSet<Knjiga> Knjige { get; set; }
+        public DbSet<IznajmljenaKnjiga> IznajmljeneKnjige { get; set; }
+        public DbSet<Rezervacija> Rezervacije { get; set; }
     }
 }
