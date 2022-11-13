@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Aro+3xfyJWPU5IlvNAgY6Q8htuu0NGA6bn7fMj1ZfRQ=",
+  "Hash": "NdGLuZdBVqBIE+vDV2vY3TSIUNYNvow7Jkw87HxhGm4=",
   "Source": "GET-Biblioteka",
   "BasePath": "_content/GET-Biblioteka",
   "Mode": "Default",
@@ -1105,6 +1105,23 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "F:\\GitHub_Projects\\GET-Biblioteka\\GET-Biblioteka\\wwwroot\\js\\signalRhub.js",
+      "SourceId": "GET-Biblioteka",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\GitHub_Projects\\GET-Biblioteka\\GET-Biblioteka\\wwwroot\\",
+      "BasePath": "_content/GET-Biblioteka",
+      "RelativePath": "js/signalRhub.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\signalRhub.js"
+    },
+    {
       "Identity": "F:\\GitHub_Projects\\GET-Biblioteka\\GET-Biblioteka\\wwwroot\\js\\site.js",
       "SourceId": "GET-Biblioteka",
       "SourceType": "Discovered",
@@ -2089,6 +2106,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "F:\\GitHub_Projects\\GET-Biblioteka\\GET-Biblioteka\\wwwroot\\lib\\microsoft\\signalr\\dist\\browser\\signalr.js",
+      "SourceId": "GET-Biblioteka",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\GitHub_Projects\\GET-Biblioteka\\GET-Biblioteka\\wwwroot\\",
+      "BasePath": "_content/GET-Biblioteka",
+      "RelativePath": "lib/microsoft/signalr/dist/browser/signalr.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\microsoft\\signalr\\dist\\browser\\signalr.js"
+    },
+    {
+      "Identity": "F:\\GitHub_Projects\\GET-Biblioteka\\GET-Biblioteka\\wwwroot\\lib\\microsoft\\signalr\\dist\\browser\\signalr.min.js",
+      "SourceId": "GET-Biblioteka",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\GitHub_Projects\\GET-Biblioteka\\GET-Biblioteka\\wwwroot\\",
+      "BasePath": "_content/GET-Biblioteka",
+      "RelativePath": "lib/microsoft/signalr/dist/browser/signalr.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\microsoft\\signalr\\dist\\browser\\signalr.min.js"
     }
   ]
 }

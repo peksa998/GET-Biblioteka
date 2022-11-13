@@ -1,6 +1,7 @@
 using GET_Biblioteka.DAL;
 using GET_Biblioteka.Data;
 using GET_Biblioteka.Services;
+using GET_Biblioteka.SignalHub;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,8 +27,8 @@ builder.Services.AddTransient<InterfaceRezervacijaService, RezervacijaService>()
 builder.Services.AddTransient<InterfaceIznajmljenaKnjigaDAL, IznajmljenaKnjigaDAL>();
 builder.Services.AddTransient<InterfaceIznajmljenaKnjigaService, IznajmljenaKnjigaService>();
 
-//builder.Services.AddSignalR();
-//builder.Services.AddHttpContextAccessor();
+builder.Services.AddSignalR();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -77,6 +78,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHub<SignalRHub>("/hub");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
