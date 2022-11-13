@@ -18,7 +18,7 @@ connection.on("ReservationCreated", function (reservationId, bookId, userId, boo
 
     var aForm = document.createElement("form");
     aForm.setAttribute('method', "post");
-    aForm.setAttribute('action', "IssuedBook/CreateIssuedBook");
+    aForm.setAttribute('action', "IznajmljenaKnjiga/CreateIssuedBook");
 
     var ri = document.createElement("input");
     ri.setAttribute('type', "hidden");
@@ -37,7 +37,7 @@ connection.on("ReservationCreated", function (reservationId, bookId, userId, boo
 
     var s = document.createElement("input");
     s.setAttribute('type', "submit");
-    s.setAttribute('value', "Approve");
+    s.setAttribute('value', "Prihvati");
     s.className = 'btn btn-primary';
 
     aForm.appendChild(ri);
@@ -50,7 +50,7 @@ connection.on("ReservationCreated", function (reservationId, bookId, userId, boo
 
     var dForm = document.createElement("form");
     dForm.setAttribute('method', "post");
-    dForm.setAttribute('action', "Reservation/DeleteReservation");
+    dForm.setAttribute('action', "Rezervacija/DeleteReservation");
 
     var ri2 = document.createElement("input");
     ri2.setAttribute('type', "hidden");
@@ -59,7 +59,7 @@ connection.on("ReservationCreated", function (reservationId, bookId, userId, boo
 
     var sd = document.createElement("input");
     sd.setAttribute('type', "submit");
-    sd.setAttribute('value', "Disapprove");
+    sd.setAttribute('value', "Odbij");
     sd.className = 'btn btn-danger';
 
     dForm.appendChild(ri2);
