@@ -1,4 +1,6 @@
+using GET_Biblioteka.DAL;
 using GET_Biblioteka.Data;
+using GET_Biblioteka.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +15,24 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+
+// ******************************
+
+builder.Services.AddTransient<InterfaceKnjigaDAL, KnjigaDAL>();
+builder.Services.AddTransient<InterfaceKnjigaService, KnjigaService>();
+builder.Services.AddTransient<InterfaceRezervacijaDAL, RezervacijaDAL>();
+builder.Services.AddTransient<InterfaceRezervacijaService, RezervacijaService>();
+builder.Services.AddTransient<InterfaceIznajmljenaKnjigaDAL, IznajmljenaKnjigaDAL>();
+builder.Services.AddTransient<InterfaceIznajmljenaKnjigaService, IznajmljenaKnjigaService>();
+
+//builder.Services.AddSignalR();
+//builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+// ******************************
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

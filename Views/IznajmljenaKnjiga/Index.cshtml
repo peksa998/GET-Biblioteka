@@ -1,47 +1,38 @@
-﻿@model IEnumerable<GET_Biblioteka.Models.IznajmljenaKnjiga>
+﻿@model GET_Biblioteka.Models.IznajmljeneKnjigeViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Iznajmljene knjige</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.KnjigaID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DatumVracanja)
-            </th>
-            <th></th>
+            <th>Book title</th>
+            <th>User name</th>
+            <th>Due date</th>
+            <th>Mark as returned</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.KnjigaID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DatumVracanja)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IznajmljenaKnjigaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IznajmljenaKnjigaID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IznajmljenaKnjigaID">Delete</a>
-            </td>
-        </tr>
-}
+        @{if (Model.iznajmljeneKnjige != null)
+            { 
+                @foreach (var item in Model.iznajmljeneKnjige)
+                {
+                    <tr>
+                        <td>@item.NazivKnjige</td>
+                        <td>@item.UserName</td>
+                        <td>@item.DatumVracanja.ToString("dd/MMMM/yyyy")</td>
+                        <td>
+                            <form asp-controller="IznajmljenaKnjiga" asp-action="ReturnBook" method="post">
+                             <input type="hidden" id="issuedBookId" name="issuedBookId" value="@item.IznajmljenaKnjigaID" />
+                             <button class="btn btn-primary" type="submit">Vrati knjigu</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        }
     </tbody>
 </table>

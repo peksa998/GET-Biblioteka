@@ -1,41 +1,49 @@
-﻿@model IEnumerable<GET_Biblioteka.Models.Rezervacija>
+﻿@model GET_Biblioteka.Models.RezervacijeViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@{
+    Layout = "_Layout";
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<h1>Zahtevi za rezervaciju</h1>
+
+<table class="table" id="reservations-table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KnjigaID)
-            </th>
-            <th></th>
+            <th>Knjiga</th>
+            <th>Korisnik</th>
+            <th>Prihvati</th>
+            <th>Odbij</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KnjigaID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RezervacijaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RezervacijaID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RezervacijaID">Delete</a>
-            </td>
-        </tr>
-}
+        @{ if (Model.Rezervacije != null)
+            {
+                @foreach (var item in Model.Rezervacije)
+                {
+                <tr>
+                    <td>@item.NazivKnjige</td>
+                    <td>@item.UserName</td>
+                    <td>
+                        <form asp-controller="IznajmljenaKnjiga" asp-action="CreateIssuedBook" method="post">
+                            <input type="hidden" id="bookId" name="bookId" value="@item.KnjigaID" />
+                            <input type="hidden" id="userId" name="userId" value="@item.UserId" />
+                            <input type="hidden" id="reservationId" name="reservationId" value="@item.RezervacijaID" />
+                            <button class="btn btn-primary" type="submit">Prihvati</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-controller="Rezervacija" asp-action="DeleteReservation" method="post">
+                            <input type="hidden" id="reservationId" name="reservationId" value="@item.RezervacijaID" />
+                            <button class="btn btn-danger" type="submit" >Odbij</button>
+                        </form>
+                    </td>
+                </tr>
+                }
+                }
+            }
     </tbody>
 </table>

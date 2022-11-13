@@ -1,0 +1,47 @@
+﻿@model GET_Biblioteka.Models.KnjigeViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    Layout = "_Layout";
+}
+
+<h1>Knjige</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Knjiga</th>
+            <th>Pisac</th>
+            <th>Dostupna</th>
+            <th>Rezervisi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Knjige)
+        {
+        <tr>
+            <td>@item.Naziv</td>
+            <td>@item.Pisac</td>
+            <td>@{
+                if (item.Kolicina > 0)
+                {
+                    <span>Da</span>
+                }
+                else
+                {
+                    <span>Ne</span>
+                }
+            }</td>
+            <td>@{
+                    <form asp-controller="Knjiga" asp-action="CreateReservation" method="post">
+                        <input type="hidden" id="bookId" name="bookId" value="@item.KnjigaID" />
+                        <button class="btn btn-primary" type="submit" @(item.Dostupna == false ? "disabled" : string.Empty)>Rezervisi</button>
+                    </form>
+                }</td>
+        </tr>
+        }
+    </tbody>
+</table>

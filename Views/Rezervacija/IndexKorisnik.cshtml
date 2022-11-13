@@ -1,0 +1,29 @@
+﻿@model GET_Biblioteka.Models.RezervacijeViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pozajmljene knjige</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Knjige</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ if (Model.Rezervacije != null)
+            {
+                @foreach (var item in Model.Rezervacije)
+                {
+                    <tr id="@item.RezervacijaID">
+                        <td>@item.NazivKnjige</td>
+                        <td>Pending...</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

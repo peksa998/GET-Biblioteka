@@ -1,0 +1,30 @@
+﻿@model GET_Biblioteka.Models.IznajmljeneKnjigeViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pozajmljene knjige</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naziv knjige</th>
+            <th>Rok za vracanje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{if (Model.iznajmljeneKnjige != null)
+            {
+                @foreach (var item in Model.iznajmljeneKnjige)
+                {
+                    <tr>
+                        <td>@item.NazivKnjige</td>
+                        <td>@item.DatumVracanja.ToString("dd/MMMM/yyyy")</td>
+                    </tr>
+                }
+            }
+        }
+            </tbody>
+</table>

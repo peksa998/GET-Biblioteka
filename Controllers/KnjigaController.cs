@@ -7,155 +7,61 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GET_Biblioteka.Data;
 using GET_Biblioteka.Models;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using GET_Biblioteka.Services;
 
 namespace GET_Biblioteka.Controllers
 {
+    [Authorize]
     public class KnjigaController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public KnjigaController(ApplicationDbContext context)
+        private readonly InterfaceKnjigaService _service;
+        private readonly InterfaceRezervacijaService _reservationService;
+        public KnjigaController(InterfaceKnjigaService service, InterfaceRezervacijaService reservationService)
         {
-            _context = context;
+            _service = service;
+            _reservationService = reservationService;
         }
 
-        // GET: Knjiga
+
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Knjige.ToListAsync());
+            var authResult = await HttpContext.AuthenticateAsync();
+            var userId = authResult.Principal.FindFirst(ClaimTypes.NameIdentifier).Value;
+            KnjigeViewModel bvm = _service.GetAllBooks(userId);
+            if (_service.FindUserRole(userId).Equals(true))
+                return View(bvm);
+            else
+                return View("IndexKorisnik", bvm);
         }
 
-        // GET: Knjiga/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Knjige == null)
-            {
-                return NotFound();
-            }
-
-            var knjiga = await _context.Knjige
-                .FirstOrDefaultAsync(m => m.KnjigaID == id);
-            if (knjiga == null)
-            {
-                return NotFound();
-            }
-
-            return View(knjiga);
-        }
-
-        // GET: Knjiga/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Knjiga/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        public IActionResult UserIndex(KnjigeViewModel bvm)
+        {
+            return View(bvm);
+        }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("KnjigaID,Naziv,Pisac,Kolicina")] Knjiga knjiga)
+        public IActionResult Create(Knjiga newBook)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(knjiga);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(knjiga);
+            _service.Create(newBook);
+            return RedirectToAction("Index");
         }
 
-        // GET: Knjiga/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Knjige == null)
-            {
-                return NotFound();
-            }
-
-            var knjiga = await _context.Knjige.FindAsync(id);
-            if (knjiga == null)
-            {
-                return NotFound();
-            }
-            return View(knjiga);
-        }
-
-        // POST: Knjiga/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("KnjigaID,Naziv,Pisac,Kolicina")] Knjiga knjiga)
+        public async Task<IActionResult> CreateReservation([FromForm(Name = "bookId")] int bookId)
         {
-            if (id != knjiga.KnjigaID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(knjiga);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!KnjigaExists(knjiga.KnjigaID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(knjiga);
+            var authResult = await HttpContext.AuthenticateAsync();
+            var userId = authResult.Principal.FindFirst(ClaimTypes.NameIdentifier).Value.ToString();
+            var result = _reservationService.Create(bookId, userId);
+            return RedirectToAction("Index", "Knjiga");
         }
 
-        // GET: Knjiga/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Knjige == null)
-            {
-                return NotFound();
-            }
-
-            var knjiga = await _context.Knjige
-                .FirstOrDefaultAsync(m => m.KnjigaID == id);
-            if (knjiga == null)
-            {
-                return NotFound();
-            }
-
-            return View(knjiga);
-        }
-
-        // POST: Knjiga/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Knjige == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Knjige'  is null.");
-            }
-            var knjiga = await _context.Knjige.FindAsync(id);
-            if (knjiga != null)
-            {
-                _context.Knjige.Remove(knjiga);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool KnjigaExists(int id)
-        {
-          return _context.Knjige.Any(e => e.KnjigaID == id);
-        }
     }
 }
