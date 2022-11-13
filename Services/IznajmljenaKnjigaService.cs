@@ -1,5 +1,7 @@
 ﻿using GET_Biblioteka.DAL;
 using GET_Biblioteka.Models;
+using GET_Biblioteka.SignalHub;
+using Microsoft.AspNetCore.SignalR;
 
 namespace GET_Biblioteka.Services
 {
@@ -7,15 +9,18 @@ namespace GET_Biblioteka.Services
     {
 
         private readonly InterfaceIznajmljenaKnjigaDAL _InterfaceIznajmljenaKnjigaDAL;
-        public IznajmljenaKnjigaService(InterfaceIznajmljenaKnjigaDAL InterfaceIznajmljenaKnjigaDAL)
+        private readonly IHubContext<SignalRHub> _signalRHub;
+        public IznajmljenaKnjigaService(InterfaceIznajmljenaKnjigaDAL InterfaceIznajmljenaKnjigaDAL, IHubContext<SignalRHub> signalRHub)
         {
             _InterfaceIznajmljenaKnjigaDAL = InterfaceIznajmljenaKnjigaDAL;
+            _signalRHub = signalRHub;
         }
 
 
         public void CreateIssuedBook(int reservationId, string userId, int bookId)
         {
             _InterfaceIznajmljenaKnjigaDAL.DeleteReservation(reservationId);
+            _signalRHub.Clients.All.SendAsync("IssuedBookCreated", reservationId);
             _InterfaceIznajmljenaKnjigaDAL.CreateIssuedBook(userId, bookId);
         }
 

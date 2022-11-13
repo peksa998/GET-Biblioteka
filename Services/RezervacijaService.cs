@@ -1,5 +1,7 @@
 ﻿using GET_Biblioteka.DAL;
 using GET_Biblioteka.Models;
+using GET_Biblioteka.SignalHub;
+using Microsoft.AspNetCore.SignalR;
 
 namespace GET_Biblioteka.Services
 {
@@ -8,11 +10,13 @@ namespace GET_Biblioteka.Services
 
         private readonly InterfaceRezervacijaDAL _InterfaceRezervacijaDAL;
         private readonly InterfaceKnjigaDAL _InterfaceKnjigaDAL;
+        private readonly IHubContext<SignalRHub> _signalRHub;
 
-        public RezervacijaService(InterfaceRezervacijaDAL InterfaceRezervacijaDAL, InterfaceKnjigaDAL InterfaceKnjigaDAL)
+        public RezervacijaService(InterfaceRezervacijaDAL InterfaceRezervacijaDAL, InterfaceKnjigaDAL InterfaceKnjigaDAL, IHubContext<SignalRHub> signalRHub)
         {
             _InterfaceRezervacijaDAL = InterfaceRezervacijaDAL;
             _InterfaceKnjigaDAL = InterfaceKnjigaDAL;
+            _signalRHub = signalRHub;
         }
 
         public Rezultat Create(int bookId, string userId)
@@ -38,6 +42,7 @@ namespace GET_Biblioteka.Services
             _InterfaceRezervacijaDAL.CreateReservation(reservation);
             --book.Kolicina;
             _InterfaceKnjigaDAL.UpdateBook(book);
+            _signalRHub.Clients.All.SendAsync("ReservationCreated", reservation.RezervacijaID, reservation.KnjigaID, reservation.UserId, _InterfaceRezervacijaDAL.GetBookTitleById(reservation.KnjigaID), _InterfaceRezervacijaDAL.GetUserNameById(reservation.UserId));
             Console.WriteLine(reservation.RezervacijaID);
             return Rezultat.Success;
         }
