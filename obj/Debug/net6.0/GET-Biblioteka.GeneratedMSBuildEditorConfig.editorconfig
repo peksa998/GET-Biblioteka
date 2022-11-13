@@ -27,64 +27,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/IznajmljenaKnjiga/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpuYWptbGplbmFLbmppZ2FcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/IznajmljenaKnjiga/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpuYWptbGplbmFLbmppZ2FcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/IznajmljenaKnjiga/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpuYWptbGplbmFLbmppZ2FcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/IznajmljenaKnjiga/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpuYWptbGplbmFLbmppZ2FcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/IznajmljenaKnjiga/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpuYWptbGplbmFLbmppZ2FcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/IznajmljenaKnjiga/IndexKorisnik.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpuYWptbGplbmFLbmppZ2FcSW5kZXhLb3Jpc25pay5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Knjiga/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS25qaWdhXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Knjiga/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS25qaWdhXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Knjiga/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS25qaWdhXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Knjiga/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS25qaWdhXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Knjiga/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS25qaWdhXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Rezervacija/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Rezervacija/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Rezervacija/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Rezervacija/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcRWRpdC5jc2h0bWw=
+[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Knjiga/IndexKorisnik.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS25qaWdhXEluZGV4S29yaXNuaWsuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Rezervacija/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Rezervacija/IndexKorisnik.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcSW5kZXhLb3Jpc25pay5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/GitHub_Projects/GET-Biblioteka/GET-Biblioteka/Views/Shared/Error.cshtml]
