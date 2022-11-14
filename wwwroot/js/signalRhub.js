@@ -75,6 +75,7 @@ connection.on("IssuedBookCreated", function (reservationId) {
     element.parentNode.removeChild(element);
 });
 
+
 connection.start().then(function () {
     console.log("Connection enstablished!");
 }).catch(function (err) {

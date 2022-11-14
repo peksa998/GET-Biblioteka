@@ -49,7 +49,7 @@ namespace GET_Biblioteka.Services
 
         public void DeleteReservation(int reservationId)
         {
-            _InterfaceRezervacijaDAL.DeleteReservation(reservationId);
+            _InterfaceRezervacijaDAL.DeleteReservation(reservationId);  
         }
 
         public bool FindUserRole(string userId)
