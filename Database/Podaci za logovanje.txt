@@ -1,0 +1,19 @@
+---Admin---
+username: admin@admin.com
+password: Test123.
+
+---Korisnici---
+username: test@test.com
+password: Test123.
+
+username: test1@test.com
+password: Test123.
+
+username: test2@test.com
+password: Test123.
+
+username: test3@test.com
+password: Test123.
+
+username: test4@test.com
+password: Test123.
