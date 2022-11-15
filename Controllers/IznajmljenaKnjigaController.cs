@@ -22,6 +22,7 @@ namespace GET_Biblioteka.Controllers
             _service = service;
         }
 
+        // prikaz ViewModela IznajmljenaKnjiga, u zavisnosti od role
         public IActionResult Index()
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -42,17 +43,25 @@ namespace GET_Biblioteka.Controllers
             return View();
         }
 
+        // ovo ne treba, jer UserIndex pozivam direktno preko View
         public IActionResult UserIndex(IznajmljenaKnjigaViewModel bvm)
         {
             return View(bvm);
         }
 
+        // poziv akcije iz Rezervacija/Index.cshtml, uzima sa forme id IznajmljeneKnjige
+        // uzima podatke sa forme
+        // prosledjuje podatke za kreiranje Iznajmljene knjige
+        // zatim poziva Index da opet renderuje View
         public IActionResult CreateIssuedBook([FromForm(Name = "reservationId")] int ReservationId, [FromForm(Name = "userId")] string UserId, [FromForm(Name = "bookId")] int BookId)
         {
             _service.CreateIssuedBook(ReservationId, UserId, BookId);
             return RedirectToAction("Index", "Rezervacija");
         }
 
+        // poziv akcije iz IznajmljenaKnjiga/Index.cshtml, uzima sa forme id IznajmljeneKnjige
+        // prosledjuje taj id dalje za brisanje
+        // zatim poziva Index da opet renderuje View
         [HttpPost]
         public IActionResult ReturnBook([FromForm(Name = "issuedBookId")] int IssuedBookId)
         {

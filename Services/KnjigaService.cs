@@ -11,16 +11,19 @@ namespace GET_Biblioteka.Services
             _InterfaceKnjigaDAL = InterfaceKnjigaDAL;
         }
 
+        // prolaz
         public void Create(Knjiga newBook)
         {
             _InterfaceKnjigaDAL.CreateBook(newBook);
         }
 
+        // prolaz
         public bool FindUserRole(string userId)
         {
             return _InterfaceKnjigaDAL.FindUserRole(userId);
         }
 
+        // vraca ViewModel koji pravi na osnovu liste svih knjiga iz baze
         public KnjigeViewModel GetAllBooks(string userId)
         {
             var books = _InterfaceKnjigaDAL.GetAllBooks();

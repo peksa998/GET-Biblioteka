@@ -20,6 +20,7 @@
         </tr>
     </thead>
     <tbody>
+        @* Prikaz podataka iz liste ViewModel *@
         @foreach (var item in Model.Knjige)
         {
         <tr>
@@ -38,6 +39,7 @@
             <td>@{
                     <form asp-controller="Knjiga" asp-action="CreateReservation" method="post">
                         <input type="hidden" id="bookId" name="bookId" value="@item.KnjigaID" />
+                        @* Ako je Dostupna false dodaje atribut disabled, ako je true nista *@
                         <button class="btn btn-primary" type="submit" @(item.Dostupna == false ? "disabled" : string.Empty)>Rezervisi</button>
                     </form>
                 }</td>

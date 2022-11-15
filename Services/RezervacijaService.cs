@@ -19,8 +19,10 @@ namespace GET_Biblioteka.Services
             _signalRHub = signalRHub;
         }
 
+        // kreira rezervaciju, salje je dalje u bazu i ako je sve ok vraca true preko Rezultat
         public Rezultat Create(int bookId, string userId)
         {
+            // ovo nije potrebno, clickable resio 
             if (_InterfaceRezervacijaDAL.IsBookReservedByUser(bookId, userId))
             {
                 throw new Exception("Vec ste rezervisali ovu knjigu!");
@@ -37,26 +39,31 @@ namespace GET_Biblioteka.Services
                 throw new Exception("Knjiga nije na stanju");
             }
 
-
+            // pravi rezervaciju, upisuje je u bazu; radi se update knjige za kolicinu
             var reservation = new Rezervacija() { KnjigaID = bookId, UserId = userId };
             _InterfaceRezervacijaDAL.CreateReservation(reservation);
             --book.Kolicina;
             _InterfaceKnjigaDAL.UpdateBook(book);
+
+            // ovde aktiviramo ReservationCreated u signalRhub.js i saljemo mu ove podatke
             _signalRHub.Clients.All.SendAsync("ReservationCreated", reservation.RezervacijaID, reservation.KnjigaID, reservation.UserId, _InterfaceRezervacijaDAL.GetBookTitleById(reservation.KnjigaID), _InterfaceRezervacijaDAL.GetUserNameById(reservation.UserId));
             Console.WriteLine(reservation.RezervacijaID);
             return Rezultat.Success;
         }
 
+        // prolaz
         public void DeleteReservation(int reservationId)
         {
             _InterfaceRezervacijaDAL.DeleteReservation(reservationId);  
         }
 
+        // prolaz, vraca false za korisnika, true za admina
         public bool FindUserRole(string userId)
         {
             return _InterfaceRezervacijaDAL.FindUserRole(userId);
         }
 
+        // vraca ViewModel koji pravi na osnovu liste svih rezervacija iz baze, ovo je za admina
         public RezervacijeViewModel GetAllReservations()
         {
             var reservations = _InterfaceRezervacijaDAL.GetAllReservations();
@@ -73,6 +80,7 @@ namespace GET_Biblioteka.Services
             return rvm;
         }
 
+        // vraca ViewModel koji pravi na osnovu liste svih rezervacija iz baze, ovo je za korisnika
         public RezervacijeViewModel GetAllReservationsByUser(string userId)
         {
             var reservations = _InterfaceRezervacijaDAL.GetAllReservationsByUser(userId);

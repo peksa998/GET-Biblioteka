@@ -26,7 +26,7 @@ namespace GET_Biblioteka.Controllers
             _reservationService = reservationService;
         }
 
-
+        // prikaz ViewModela knjiga, u zavisnosti od role
         public async Task<IActionResult> Index()
         {
             var authResult = await HttpContext.AuthenticateAsync();
@@ -38,15 +38,19 @@ namespace GET_Biblioteka.Controllers
                 return View("IndexKorisnik", bvm);
         }
 
+        // renderuje prikaz za create
         public IActionResult Create()
         {
             return View();
         }
 
+        // ovo ne treba, jer UserIndex pozivam direktno preko View
         public IActionResult UserIndex(KnjigeViewModel bvm)
         {
             return View(bvm);
         }
+
+        // poziv akcije iz Knjiga/Create.cshtml, uzima podatke sa forme i prosledjuje kao Knjiga
         [HttpPost]
         public IActionResult Create(Knjiga newBook)
         {
@@ -54,6 +58,9 @@ namespace GET_Biblioteka.Controllers
             return RedirectToAction("Index");
         }
 
+        // poziv akcije iz Knjiga/IndexKorisnik.cshtml, uzima sa forme id knjige, trazi id od registrovanog korisnika
+        // pa prosledjuje te podatke za kreiranje rezervacije
+        // zatim poziva Index da opet renderuje View
         [HttpPost]
         public async Task<IActionResult> CreateReservation([FromForm(Name = "bookId")] int bookId)
         {

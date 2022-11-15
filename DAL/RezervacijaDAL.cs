@@ -12,12 +12,14 @@ namespace GET_Biblioteka.DAL
             _context = context;
         }
 
+        // kreiranje nove rezervacije
         public void CreateReservation(Rezervacija newReservation)
         {
             _context.Rezervacije.Add(newReservation);
             _context.SaveChanges();
         }
 
+        // brisanje rezervacije na osnovi id
         public void DeleteReservation(int reservationId)
         {
             var res = _context.Rezervacije.Where(r => r.RezervacijaID == reservationId).FirstOrDefault();
@@ -31,6 +33,7 @@ namespace GET_Biblioteka.DAL
             }
         }
 
+        // vraca false za korisnika, true za admina
         public bool FindUserRole(string userId)
         {
             var role = _context.UserRoles.Where(x => x.UserId == userId).FirstOrDefault();
@@ -38,11 +41,13 @@ namespace GET_Biblioteka.DAL
             else return false;
         }
 
+        // vraca listu svih rezervacija
         public List<Rezervacija> GetAllReservations()
         {
             return _context.Rezervacije.ToList();
         }
 
+        // vraca listu rezervacija za odredjenog korisnika
         public List<Rezervacija> GetAllReservationsByUser(string userId)
         {
             return _context.Rezervacije.Where(r => r.UserId == userId).ToList();

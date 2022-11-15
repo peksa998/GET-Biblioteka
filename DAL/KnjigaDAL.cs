@@ -11,12 +11,14 @@ namespace GET_Biblioteka.DAL
             _context = context;
         }
 
+        // dodavanje nove knjige u bazu
         public void CreateBook(Knjiga newBook)
         {
             _context.Knjige.Add(newBook);
             _context.SaveChanges();
         }
 
+        // vraca false za korisnika, true za admina
         public bool FindUserRole(string userId)
         {
             var role = _context.UserRoles.Where(x => x.UserId == userId).FirstOrDefault();
@@ -24,11 +26,13 @@ namespace GET_Biblioteka.DAL
             else return false;
         }
 
+        // vraca listu svih knjiga iz baze
         public List<Knjiga> GetAllBooks()
         {
             return _context.Knjige.ToList();
         }
 
+        // vraca sve rezervacije za odredjenog korisnika
         public List<Rezervacija> GetAllReservationsByUser(string userId)
         {
             return _context.Rezervacije.Where(r => r.UserId == userId).ToList();
@@ -43,12 +47,12 @@ namespace GET_Biblioteka.DAL
         {
             return _context.Rezervacije.FirstOrDefault(r => r.UserId == userId && r.KnjigaID == bookId) != null;
         }
-
         public bool IsBookIssuedToUser(int bookId, string userId)
         {
             return _context.IznajmljeneKnjige.FirstOrDefault(r => r.UserId == userId && r.KnjigaID == bookId) != null;
         }
 
+        // da li je knjiga dostupna za tog korisnika ili uopste
         public bool IsReservable(int bookId, string Id)
         {
             List<Rezervacija> list = GetAllReservationsByUser(Id);
@@ -60,6 +64,7 @@ namespace GET_Biblioteka.DAL
             return true;
         }
 
+        // update knjige, tj. kolicine
         public void UpdateBook(Knjiga book)
         {
             var dbBook = _context.Knjige.FirstOrDefault(b => b.KnjigaID == book.KnjigaID);

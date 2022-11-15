@@ -18,6 +18,8 @@ namespace GET_Biblioteka.DAL
             _context.IznajmljeneKnjige.Add(newIssuedBook);
             _context.SaveChanges();
         }
+
+        // kreiranje iznajmljene knjige
         public void CreateIssuedBook(string userId, int bookId)
         {
             IznajmljenaKnjiga ib = new IznajmljenaKnjiga() { KnjigaID = bookId, UserId = userId, DatumVracanja = DateTime.Today.AddMonths(1) };
@@ -25,6 +27,7 @@ namespace GET_Biblioteka.DAL
             _context.SaveChanges();
         }
 
+        // brisanje rezeervacije
         public void DeleteReservation(int reservationId)
         {
             var res = _context.Rezervacije.Where(r => r.RezervacijaID == reservationId).FirstOrDefault();
@@ -35,6 +38,7 @@ namespace GET_Biblioteka.DAL
             }
         }
 
+        // vraca false za korisnika, true za admina
         public bool FindUserRole(string userId)
         {
             var role = _context.UserRoles.Where(x => x.UserId == userId).FirstOrDefault();
@@ -62,6 +66,8 @@ namespace GET_Biblioteka.DAL
             return _context.Users.Where(r => r.Id == userId).FirstOrDefault().UserName.ToString();
         }
 
+        // vracanje knjige
+        // povecava kolicinu knjige za 1, pa brise iznajmljenu knjigu
         public IznajmljenaKnjiga ReturnBook(int BookIssueId)
         {
             var res = _context.IznajmljeneKnjige.Where(r => r.IznajmljenaKnjigaID == BookIssueId).FirstOrDefault();

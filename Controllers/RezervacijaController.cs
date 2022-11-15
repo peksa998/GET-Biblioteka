@@ -22,22 +22,27 @@ namespace GET_Biblioteka.Controllers
             _service = service;
         }
 
+        // prikaz ViewModela Rezervacija, u zavisnosti od role
         public IActionResult Index()
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             if (_service.FindUserRole(userId).Equals(true))
             {
+                // vraca listu ViewModel Rezervacija
                 var bvm = _service.GetAllReservations();
                 return View(bvm);
             }
             else
             {
+                // vraca listu ViewModel Rezervacija za odredjenog korisnika
                 var bvm = _service.GetAllReservationsByUser(userId);
                 return View("IndexKorisnik", bvm);
             }
         }
 
+        // poziv akcije iz Rezervacija/Index.cshtml, uzima id rezervacije i prosledjuje za brisanje
+        // zatim poziva Index da opet renderuje View
         [HttpPost]
         public IActionResult DeleteReservation([FromForm(Name = "reservationId")] int ReservationId)
         {

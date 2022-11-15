@@ -5,6 +5,8 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/hub").build();
 
 connection.on("ReservationCreated", function (reservationId, bookId, userId, bookName, userName) {
     console.log(reservationId);
+
+    // ovde kreiramo sve potrebne elemente za formu i ubacujemo je u View, Rezervacija/Index.cshtml
     
     var table = document.getElementById("reservations-table");
     var row = table.insertRow();
@@ -70,6 +72,8 @@ connection.on("ReservationCreated", function (reservationId, bookId, userId, boo
 
 
 connection.on("IssuedBookCreated", function (reservationId) {
+    // s obzirom da smo iznajmili knjigu, brisemo je iz rezervacija
+    // tj iz View Rezervacija/IndexKorisnik.cshtml
     console.log(reservationId);
     var element = document.getElementById(reservationId);
     element.parentNode.removeChild(element);
